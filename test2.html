@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style>
+    .wrap{
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 400px;
+      font-size: 20px;
+      line-height: 80px;
+      background: orangered;
+      padding: 10px;
+      height: 400px;
+    }
+    #btn{
+      position: fixed;
+      top: 0;
+      right: 0;
+    }
+    </style>
+  </head>
+  <body>
+    <button id="btn">按钮</button>
+    <div class="wrap">
+      如果同一起声明，它将为基本形状提供相应的参考盒子。通过自定义，它将利用确定的盒子边缘包括任何形状边角（比如说，被border-radius定义的剪切路径）。几何体盒子将会有以下的值：
+    </div>
+  </body>
+  <script src='./jquery-3.2.0.js'></script>
+  <script>
+  var wrap = document.querySelector('.wrap')
+
+  function toPersonage(num){
+    return num[num.length-1]==='%'?num:num*100+'%';
+  }
+
+  for(var i=0;i<63;i++){
+    let clone = wrap.cloneNode(true)
+    document.body.appendChild(clone)
+  }
+  var wraps = document.querySelectorAll('.wrap')
+  wraps.forEach((item,index)=>{
+    let x = ((index%8)/8)
+    let y = (Number.parseInt(index/8)/8)
+    console.log('polygon('+toPersonage(x)+' '+toPersonage(y)+','+toPersonage(x)+' '+toPersonage((y+1/8))+','+toPersonage((x+1/8))+' '+toPersonage((y+1/8))+','+toPersonage((y+1/8))+' '+toPersonage(y)+')');
+    item.style.clipPath = 'polygon('+toPersonage(x)+' '+toPersonage(y)+','+toPersonage(x)+' '+toPersonage((y+1/8))+','+toPersonage((x+1/8))+' '+toPersonage((y+1/8))+','+toPersonage((x+1/8))+' '+toPersonage(y)+')'
+  })
+  btn.onclick = start
+  function start(){
+    wraps.forEach((item,index)=>{
+      $(item).animate({
+        left: (index%8)*10 + 100,
+        top: Number.parseInt(index/8)*10 + 100
+      })
+    })
+  }
+  </script>
+</html>

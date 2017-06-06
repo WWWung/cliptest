@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style>
+    .wrap{
+      transform-style: preserve-3d;
+      perspective: 1000px;
+      position: relative;
+      height: 100px;
+      width: 320px;
+    }
+    .sub{
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      font-size: 48px;
+      line-height: 100px;
+      background: orangered;
+      text-align: center;
+      transform-style: preserve-3d;
+    }
+    .sub1{
+      left: 0;
+      transform: translateZ(-100px);
+    }
+    .sub2{
+      left: 110px;
+      /*transform: rotateX(45deg);*/
+    }
+    .sub3{
+      left: 220px;
+      transform: translateZ(-100px);
+    }
+    .sub4{
+      left: 110px;
+      transform: translateZ(-200px);
+    }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="sub sub1">1</div>
+      <div class="sub sub2">2</div>
+      <div class="sub sub3">3</div>
+      <div class="sub sub4">4</div>
+    </div>
+  </body>
+  <script>
+  let wrap = document.querySelector('.wrap');
+  let radius = 0;
+  window.requestAnimationFrame(move)
+  function move() {
+    radius+=0.5;
+    wrap.style.transform = 'rotateY('+radius+'deg)'
+    window.requestAnimationFrame(move)
+  }
+  </script>
+</html>
